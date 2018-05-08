@@ -14,6 +14,9 @@ const reducer = handleActions(
     },
     'RECEIVE_TOPICS': (state,action) => {
       return Object.assign({},{isFetching: false,topics: action.payload})
+    },
+    'SET_VISIBILITY_FILTER':(state,action)=>{
+      return Object.assign({},state,{filter:action.payload});
     }
   },
   defaultState

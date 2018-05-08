@@ -1,7 +1,7 @@
 import React,{Component} from 'react';
 import {Link } from 'react-router-dom';
 import style from 'style/containers/home.scss';
-import Header from 'components/header.jsx';
+import Header from './headerWithProps.jsx';
 import { fetchTopicsIfNeed,getTopics } from '../actions/topicAction';
 import { connect } from 'react-redux';
 import TopicList from 'components/topicList.jsx';

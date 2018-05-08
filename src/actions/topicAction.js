@@ -15,14 +15,26 @@ export const getTopics = createAction(
   return result.data;
 });
 
+export const setTopicFilter = createAction(
+  'SET_TOPIC_FILTER', 
+  filter=> filter
+);
 
-export const fetchTopicsIfNeed = (params) => (dispatch, getState) => {
-  if(shouldFetchTopics(getState(),params)){
-    dispatch(sendFetchTopic(dispatch,params));
-    return dispatch(getTopics(params));
-  }
+export const fetchTopicsIfNeed = (params) => 
+  (dispatch, getState) => {
+    if(shouldFetchTopics(getState(),params)){
+      dispatch(sendFetchTopic(dispatch,params));
+      return dispatch(getTopics(params));
+    }
 }
 
 const shouldFetchTopics = (state, params) => { // //判断是否应该读取数据
   return true;
+}
+
+export const VisibilityFilters = {
+  SHOW_ALL: 'SHOW_ALL',
+  SHOW_GOOD: 'SHOW_GOOD',
+  SHOW_JOB: 'SHOW_JOB',
+  SHOW_ASK: 'SHOW_ASK'
 }
