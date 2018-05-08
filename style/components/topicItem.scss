@@ -1,0 +1,32 @@
+.topic-item{
+  background-color: #fff;
+  padding: 10px;
+  border-bottom: solid 1px #e0e0e0;
+  display: flex;
+  align-items: center;
+  &:hover{
+    background-color: #e8e8ff;
+    cursor: pointer;
+  }
+  .user-logo{
+    width: 36px;
+    height: 36px;
+    margin-right: 20px;
+  }
+  .topic-title{
+    width: 80%;
+    margin-right: 20px;
+  }
+  .topic-tab{
+    background-color: #e0e0e0;
+    color: #fff;
+    font-size: 13px;
+    padding: 1px 6px;
+    border-radius: 4px;
+    margin-right: 6px;
+  }
+  .topic-time{
+    font-size: 12px;
+    color: #aaa;
+  }
+}
