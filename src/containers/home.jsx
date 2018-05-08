@@ -5,23 +5,28 @@ import Header from './headerWithProps.jsx';
 import { fetchTopicsIfNeed,getTopics } from '../actions/topicAction';
 import { connect } from 'react-redux';
 import TopicList from 'components/topicList.jsx';
+import Loadding from 'components/loadding.jsx';
 
-console.log(fetchTopicsIfNeed)
 class Home extends Component{
   componentDidMount(){
-    this.props.dispatch(fetchTopicsIfNeed({tab:'job'}));
+    this.props.dispatch(fetchTopicsIfNeed({}));
   }
   
   render(){
-    let state = this.props.state;
-    console.log(state)
+    let topicInfo = this.props.topicInfo;
+    console.log(topicInfo)
+    let { page, filter, topics,isFetching } = topicInfo;
+    let topicList = topics[filter] && topics[filter]['page'+page];
+
     return <React.Fragment>
       <Header />
       <div className="home-page">
         <div className="main">
           {
-            state.isFetching?<div>fetching data</div>:
-            <TopicList list={state.topics} />
+            topicList?
+              <TopicList style={{ opacity: isFetching ? 0.5 : 1 }} list={topicList} />:
+              (isFetching?<Loadding>fetching data...</Loadding>:
+              <div>Empty.</div>)
           }
         </div>
       </div>
@@ -31,7 +36,7 @@ class Home extends Component{
 
 function mapStateToProps (state) {
   return {
-    state
+    topicInfo: state.topicReducer
   };
 }
 

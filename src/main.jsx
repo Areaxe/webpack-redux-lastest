@@ -6,13 +6,13 @@ import Home from './containers/home.jsx';
 import List from './containers/list.jsx';
 import style from 'style/base.scss';
 import { createStore,applyMiddleware } from 'redux';
-import TopicReducer from './reducer/topicReducer';
+import Reducer from './reducer';
 import { Provider } from 'react-redux';
 import promiseMiddleware from 'redux-promise';
 import thunk from 'redux-thunk';
 
 
-let store = createStore(TopicReducer,applyMiddleware(thunk,promiseMiddleware));
+let store = createStore(Reducer,applyMiddleware(thunk,promiseMiddleware));
 const history = createBrowserHistory();
 const Main = ()=>{
   return <Router history={history}>

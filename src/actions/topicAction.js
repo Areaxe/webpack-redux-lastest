@@ -1,13 +1,15 @@
 import config from '../config/base.js';
 import {createAction} from 'redux-actions';
 import splicingUrl from '../util/splicingUrl';
-// import { ASYNC_PHASES } from 'redux-action-tools';
 
-const sendFetchTopic = createAction('GET_TOPICS');
+const sendFetchTopic = createAction('GET_TOPICS',(params)=>{
+  console.log(params);
+  return params
+});
 
 export const getTopics = createAction(
   'RECEIVE_TOPICS', 
-  async({ page, tab, limit = 10 }) => { //tab = ask share job good
+  async({ page, tab, limit }) => { //tab = ask share job good
   let url = splicingUrl(config.baseUrl + 'topics', { page, tab, limit });
   const result = await fetch(url)
     .then(response => response.json())
@@ -17,18 +19,28 @@ export const getTopics = createAction(
 
 export const setTopicFilter = createAction(
   'SET_TOPIC_FILTER', 
-  filter=> filter
+  filter => filter
 );
 
-export const fetchTopicsIfNeed = (params) => 
+export const fetchTopicsIfNeed = ({ page=1,tab='all',limit=20 }) => 
   (dispatch, getState) => {
-    if(shouldFetchTopics(getState(),params)){
-      dispatch(sendFetchTopic(dispatch,params));
+    let params = { page,tab,limit }
+    if(shouldFetchTopics(getState().topicReducer,params)){
+      dispatch(sendFetchTopic(params));
       return dispatch(getTopics(params));
     }
 }
 
 const shouldFetchTopics = (state, params) => { // //判断是否应该读取数据
+  let {page,tab} = params;
+  let {topics,isFetching} = state;
+  let data = topics[tab]&&topics[tab]['page'+page];
+  if(!data){
+    return true;
+  }
+  if(!isFetching ){
+    return false
+  }
   return true;
 }
 

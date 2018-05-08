@@ -1,29 +1,41 @@
 import TopicActon from '../actions/topicAction';
 // import {combineReducers} from 'redux';
 import { handleActions, combineActions,createActions } from 'redux-actions';
-import {getTopics} from '../actions/topicAction';
 
 const defaultState = {
   isFetching: false, 
-  topics: [] };
+  topics: {
+    all: []
+  },
+  filter: 'all',
+  saveType: {}, 
+};
+
 const reducer = handleActions(
   {
-    'GET_TOPICS': (state) => {
-      console.log('getters')
-      return Object.assign({},state,{isFetching: true});
+    'GET_TOPICS': (state,action) => {
+      return Object.assign({},state,{isFetching: true, saveType: action.payload, page: action.payload.page});
     },
+
     'RECEIVE_TOPICS': (state,action) => {
-      return Object.assign({},{isFetching: false,topics: action.payload})
+      console.log(state.saveType)
+      let { saveType, topics } = state;
+      let { page, tab } = saveType;
+      if(tab && topics[tab]){
+        topics[tab]['page'+page] = action.payload;
+      }
+      else{
+        topics[tab] = {};
+        topics[tab]['page'+page] = action.payload;
+      }
+      return Object.assign({}, state, { isFetching: false, topics })
     },
-    'SET_VISIBILITY_FILTER':(state,action)=>{
+
+    'SET_TOPIC_FILTER':(state,action)=>{
       return Object.assign({},state,{filter:action.payload});
     }
   },
   defaultState
 );
-
-// getFilterTopic(){
-
-// }
 
 export default reducer;
