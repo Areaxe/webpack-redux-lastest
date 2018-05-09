@@ -1,9 +1,12 @@
+@import '../theme.scss';
+
 .home-page{
   text-align: center;
+  padding-bottom: 30px;
   .main{
-    width: 1000px;
+    width: $main-width;
     margin: 0 auto;
-    border: solid 1px #e0e0e0;
+    border: $general-border;
     margin-top: 20px;
     text-align: left;
     position: relative;

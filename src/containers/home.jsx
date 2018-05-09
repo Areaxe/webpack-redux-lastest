@@ -13,9 +13,8 @@ class Home extends Component{
   }
   
   render(){
-    let topicInfo = this.props.topicInfo;
-    console.log(topicInfo)
-    let { page, filter, topics,isFetching } = topicInfo;
+    let topicListInfo = this.props.topicListInfo;
+    let { page, filter, topics,isFetching } = topicListInfo;
     let topicList = topics[filter] && topics[filter]['page'+page];
 
     return <React.Fragment>
@@ -36,7 +35,7 @@ class Home extends Component{
 
 function mapStateToProps (state) {
   return {
-    topicInfo: state.topicReducer
+    topicListInfo: state.topicReducer
   };
 }
 

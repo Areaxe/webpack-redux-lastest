@@ -1,0 +1,53 @@
+@import '../theme.scss';
+
+.topic-detail-page{
+  width: $main-width;
+  margin: 0 auto;
+  margin-top: 30px;
+  .main{
+    padding: 30px;
+    background-color: #fff;
+  }
+  .title{
+    text-align: center;
+    font-weight: normal;
+    font-size: 36px;
+    margin-bottom: 30px;
+  }
+  .content{
+    line-height: 2em;
+    font-size: 16px;
+    text-align: left;
+    min-height: 100px;
+    padding: 20px;
+    img{
+      max-width: 100%;
+      display: block;
+      margin: 10px 0;
+    }
+  }
+  .topic-replies{
+    background-color: #fff;
+    margin-top: 10px;
+  }
+  .replise-title{
+    line-height: 60px;
+    text-indent: 2em;
+    border-bottom: $general-border;
+  }
+}
+.comment-item{
+  border-bottom: solid 1px #eee;;
+  padding: 35px;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  .user-logo{
+    width: 36px;
+    height: 36px;
+    margin-right: 15px;
+  }
+  .comment-content{
+    width: 80%;
+  }
+}

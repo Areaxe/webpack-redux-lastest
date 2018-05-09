@@ -1,8 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter,Router,Route,Link,Switch } from 'react-router-dom';
+import { BrowserRouter,Router,Route,Link,Switch,HashRouter } from 'react-router-dom';
 import createBrowserHistory from 'history/createBrowserHistory';
 import Home from './containers/home.jsx';
+import TopicDetail from './containers/topicDetail.jsx';
 import List from './containers/list.jsx';
 import style from 'style/base.scss';
 import { createStore,applyMiddleware } from 'redux';
@@ -15,19 +16,18 @@ import thunk from 'redux-thunk';
 let store = createStore(Reducer,applyMiddleware(thunk,promiseMiddleware));
 const history = createBrowserHistory();
 const Main = ()=>{
-  return <Router history={history}>
-    <Switch>
+  return <Switch>
       <Route exact path="/" component={Home}/>
-      <Route path="/list" component={List}/>
+      <Route exact path="/topics" component={Home}/>
+      <Route path="/topic/:id" component={TopicDetail}/>
     </Switch>
-  </Router>
 }
   
 ReactDOM.render((
   <Provider store={store}>
-    <BrowserRouter>
+    <HashRouter>
       <Main />
-    </BrowserRouter>
+    </HashRouter>
   </Provider>
 ),document.querySelector('#root'));
 

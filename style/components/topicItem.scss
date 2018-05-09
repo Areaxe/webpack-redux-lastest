@@ -1,11 +1,14 @@
+@import '../theme.scss';
+
 .topic-item{
   background-color: #fff;
   padding: 10px;
-  border-bottom: solid 1px #e0e0e0;
+  border-bottom: $general-border;
   display: flex;
   align-items: center;
+  transition: all ease-in .1s;
   &:hover{
-    background-color: #e8e8ff;
+    background-color: #f4fcf0;
     cursor: pointer;
   }
   .user-logo{

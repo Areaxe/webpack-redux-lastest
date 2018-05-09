@@ -1,9 +1,9 @@
 import config from '../config/base.js';
 import {createAction} from 'redux-actions';
 import splicingUrl from '../util/splicingUrl';
+let baseUrl = config.baseUrl;
 
-const sendFetchTopic = createAction('GET_TOPICS',(params)=>{
-  console.log(params);
+const sendFetchTopicList = createAction('GET_TOPICS',(params)=>{
   return params
 });
 
@@ -22,11 +22,11 @@ export const setTopicFilter = createAction(
   filter => filter
 );
 
-export const fetchTopicsIfNeed = ({ page=1,tab='all',limit=20 }) => 
+export const fetchTopicsIfNeed = ({ page=5,tab='all',limit=20 }) => 
   (dispatch, getState) => {
     let params = { page,tab,limit }
     if(shouldFetchTopics(getState().topicReducer,params)){
-      dispatch(sendFetchTopic(params));
+      dispatch(sendFetchTopicList(params));
       return dispatch(getTopics(params));
     }
 }
@@ -44,9 +44,23 @@ const shouldFetchTopics = (state, params) => { // //判断是否应该读取数�
   return true;
 }
 
-export const VisibilityFilters = {
-  SHOW_ALL: 'SHOW_ALL',
-  SHOW_GOOD: 'SHOW_GOOD',
-  SHOW_JOB: 'SHOW_JOB',
-  SHOW_ASK: 'SHOW_ASK'
-}
+export const fetchTopicDetailIfNeed = (id) => 
+  (dispatch, getState) => {
+    let data = getState();
+    console.log(data);
+    if(data.topicDetail && data.topicDetail[id])
+      return;
+    return dispatch(getTopicDetail(id));
+  }
+
+const sendFetchTopicDetail = createAction('GET_TOPIC_DETAIL');
+
+export const getTopicDetail = createAction(
+  'GET_TOPIC_DETAIL', 
+  async(id) => { //tab = ask share job good
+  const result = await fetch(baseUrl+ '/topic/' + id)
+    .then(response => response.json())
+    .then(json => json );
+  return result.data;
+});
+  

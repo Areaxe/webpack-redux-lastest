@@ -1,7 +1,11 @@
+@import '../theme.scss';
+
 .header{
   text-align: center;
   width: 100%;
-  border-bottom: solid 1px #e0e0e0;
+  border-bottom: $general-border;
+  background-color:#80bd01;
+  color: #fff;
   .nav-list{
     list-style: none;
     width: 1000px;
@@ -14,11 +18,11 @@
       line-height: 60px;
       text-align: center;
       &:hover{
-        background-color: #f0f0f0;
+        background-color: #222;
         cursor: pointer;
       }
       &.active{
-        background-color: aqua;
+        background-color: #333;
       }
     }
   }
