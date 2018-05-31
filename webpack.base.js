@@ -1,14 +1,17 @@
 const path = require('path')
 const TransferWebpackPlugin = require('transfer-webpack-plugin');
 const webpack = require('webpack');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const extractCss = new ExtractTextPlugin('style/index.css');
+const extractScss = new ExtractTextPlugin('style/index_scss.css');
 
 module.exports = {
   mode: 'development',
   entry: {
-    main: './src/main.jsx'
+    index: './src/main.jsx'
   },
   output: {
-    filename: 'index.js',
+    filename: '[name].bundle.js',
     path: path.resolve(__dirname, 'dist')
   },
 
@@ -17,6 +20,7 @@ module.exports = {
     port: 3000,
     hot: true,
   },
+  
   resolve: {
     alias : { 
       node_modules : __dirname + '/node_modules', 
@@ -40,7 +44,14 @@ module.exports = {
       },
       {
         test:/\.scss$/,
-        use: ['style-loader', 'css-loader', 'sass-loader']
+        use: extractScss.extract({
+          fallback: 'style-loader',
+          use: ['css-loader', 'sass-loader']
+        })
+      },
+      {
+        test:/\.css$/,
+        use: extractCss.extract(['css-loader'])
       },
       // {
       //   test:/\.(jpg|png|gif|svg)$/,
@@ -60,7 +71,15 @@ module.exports = {
       }
     ], path.resolve(__dirname,'src')),
     new webpack.HotModuleReplacementPlugin(),
-    ]
+    extractCss,
+    extractScss,
+    ],
+    optimization :{
+      splitChunks:{
+        name: 'common'
+      }
+    }
+
 }
 
 //npm install --save-dev extract-text-webpack-plugin@next
