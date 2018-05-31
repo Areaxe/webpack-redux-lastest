@@ -5,6 +5,7 @@ import createBrowserHistory from 'history/createBrowserHistory';
 import Home from './containers/home.jsx';
 import TopicDetail from './containers/topicDetail.jsx';
 import List from './containers/list.jsx';
+import NotFound from './containers/not_found.jsx'
 import style from 'style/base.scss';
 import { createStore,applyMiddleware } from 'redux';
 import Reducer from './reducer';
@@ -19,6 +20,7 @@ const Main = ()=>{
       <Route exact path="/" component={Home}/>
       <Route exact path="/topics" component={Home}/>
       <Route path="/topic/:id" component={TopicDetail}/>
+      <Route component={NotFound}/>
     </Switch>
 }
   
