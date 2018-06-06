@@ -1,0 +1,23 @@
+@import '../theme.scss';
+
+.button{
+  border-radius: 4px;
+  padding: 10px 30px;
+  margin: 10px;
+  border: none;
+  outline: none;
+  color: #fff;
+  background-color: map-get($colors, primary);
+  transition: all ease-out .3s;
+  $theme-color:map-keys($colors);
+  @each $member in $theme-color{
+    &.#{$member}{
+      $color: map-get($colors, $member);
+      background-color: $color;
+      &:hover{
+        cursor: pointer;
+        box-shadow: 0 0 10px $color;
+      }
+    }
+  }
+}

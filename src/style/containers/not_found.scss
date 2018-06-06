@@ -10,4 +10,12 @@
     font-size: 16px;
     color: #666;
   }
+  .img-contain{
+    background: url('/assets/images/treasure-box.gif') center;
+    width: 200px;
+    height: 300px;
+  }
+  .treasure-box-hide{
+    display: none;
+  }
 }

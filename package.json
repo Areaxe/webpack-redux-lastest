@@ -4,7 +4,7 @@
   "description": "",
   "scripts": {
     "build": "webpack --config ./webpack.base.js",
-    "dev": "webpack-dev-server --config ./webpack.base.js --watch",
+    "dev": "webpack-dev-server --config ./webpack.base.js --watch --hot",
     "start": "webpack-dev-server --config ./webpack.base.js --mode production --watch"
   },
   "author": "xiaodan",
@@ -20,12 +20,15 @@
     "webpack-cli": "^2.1.4"
   },
   "dependencies": {
+    "clean-webpack-plugin": "^0.1.19",
     "css-loader": "^0.28.11",
-    "lodash": "^4.17.10",
+    "file-loader": "^1.1.11",
+    "jquery": "^3.3.1",
     "moment": "^2.22.1",
     "node-sass": "^4.9.0",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
+    "react-fontawesome": "^1.6.1",
     "react-redux": "^5.0.7",
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
@@ -34,6 +37,7 @@
     "redux-promise": "^0.5.3",
     "redux-thunk": "^2.2.0",
     "sass-loader": "^7.0.1",
+    "url-loader": "^1.0.1",
     "webpack": "^4.10.2",
     "webpack-dev-server": "^3.1.4",
     "webpack-merge": "^4.1.2"

@@ -6,10 +6,12 @@ import { fetchTopicsIfNeed,getTopics } from '../actions/topicAction';
 import { connect } from 'react-redux';
 import TopicList from 'components/topicList.jsx';
 import Loadding from 'components/loadding.jsx';
+import $ from 'jQuery';
 
 class Home extends Component{
   componentDidMount(){
     this.props.dispatch(fetchTopicsIfNeed({}));
+    console.log($('.btn'));
   }
   
   render(){
@@ -28,6 +30,7 @@ class Home extends Component{
               <div>Empty.</div>)
           }
         </div>
+        <button className="btn" >aaa</button>
       </div>
     </React.Fragment>
   }

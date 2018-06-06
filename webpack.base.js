@@ -4,19 +4,38 @@ const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const extractCss = new ExtractTextPlugin('style/index.css');
 const extractScss = new ExtractTextPlugin('style/index_scss.css');
+var CleanWebpackPlugin = require('clean-webpack-plugin');
+
+// function getEntries(paths) {
+//   // node 中同步获取文件列表
+//   var files = glob.sync(paths),
+//     entries = {};
+
+//   files.forEach(function(filepath) {
+//     var toArray = filepath.split('/');
+//     var filename = toArray[toArray.length - 2];
+//     entries[filename] = filepath;
+//   });
+//   return entries;
+// }
+
 
 module.exports = {
   mode: 'development',
   entry: {
-    index: './src/main.jsx'
+    index: './src/main.jsx',
+    jquery: './src/util/jQuery.js',
+    lodash: './src/util/lodash.js',
   },
   output: {
-    filename: '[name].bundle.js',
-    path: path.resolve(__dirname, 'dist')
+    filename: '[name].js',
+    chunkFilename: '[name].[id].js',
+    path: path.resolve(__dirname, 'dist/'),
+    publicPath: path.resolve(__dirname, 'dist/'),
   },
 
   devServer: {
-    contentBase: path.resolve(__dirname, 'dist'),
+    contentBase: path.resolve(__dirname, 'dist/'),
     port: 3000,
     hot: true,
   },
@@ -29,12 +48,24 @@ module.exports = {
       components : __dirname + '/src/components', 
       actions : __dirname + '/src/actions',
       reducer: __dirname + '/src/reducer', 
-      image : __dirname + '/assets/image',
-      style: __dirname + '/style'
+      images : __dirname + '/assets/images',
+      style: __dirname + '/src/style',
+      assets: __dirname + '/assets'
     }
   },
   module: {
     rules: [
+      // {
+      //   test: /.*/,
+      //   include:path.join(__dirname,'./src'),
+      //    use: {
+      //     loader: 'bundle-loader',
+      //     options: {
+      //       name: 'my-chunk',
+      //       lazy: true
+      //     }
+      //   }
+      // },
       {
         test: /\.(js|jsx)$/,
         loader: 'babel-loader',
@@ -53,14 +84,23 @@ module.exports = {
         test:/\.css$/,
         use: extractCss.extract(['css-loader'])
       },
-      // {
-      //   test:/\.(jpg|png|gif|svg)$/,
-      //   use:'url-loader',
-      //   include:path.join(__dirname,'./src'),
-      //   exclude:/node_modules/
-      // }
+      {
+        test:/\.(jpg|png|gif|svg)$/,
+        use:'url-loader',
+        include:path.join(__dirname,'./assets'),
+        exclude:/node_modules/
+      },
+      {
+        test:/\.(woff|woff2|eot|ttf|otf|mp3)$/,
+        use:'url-loader?limit=8192&name=[path][name].[ext]',
+        include:path.join(__dirname,'assets'),
+        exclude:/node_modules/
+      }
     ]
   },
+  externals:[{
+    jquery: 'jQuery'
+  }],
    node: {
         fs: 'empty'
     },
@@ -71,6 +111,7 @@ module.exports = {
       }
     ], path.resolve(__dirname,'src')),
     new webpack.HotModuleReplacementPlugin(),
+    new CleanWebpackPlugin(['list']),
     extractCss,
     extractScss,
     ],

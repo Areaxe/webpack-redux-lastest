@@ -12,6 +12,7 @@ import Reducer from './reducer';
 import { Provider } from 'react-redux';
 import promise from 'redux-promise';
 import thunk from './util/thunk';
+import ComponentTest from './containers/componentTest.jsx';
 
 let store = createStore(Reducer,applyMiddleware(thunk,promise));
 const history = createBrowserHistory();
@@ -20,6 +21,7 @@ const Main = ()=>{
       <Route exact path="/" component={Home}/>
       <Route exact path="/topics" component={Home}/>
       <Route path="/topic/:id" component={TopicDetail}/>
+      <Route path="/components" component={ComponentTest}/>
       <Route component={NotFound}/>
     </Switch>
 }
