@@ -2,23 +2,9 @@ const path = require('path')
 const TransferWebpackPlugin = require('transfer-webpack-plugin');
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const extractCss = new ExtractTextPlugin('style/index.css');
-const extractScss = new ExtractTextPlugin('style/index_scss.css');
+const extractCss = new ExtractTextPlugin('index_external.css');
+const extractScss = new ExtractTextPlugin('index.css');
 var CleanWebpackPlugin = require('clean-webpack-plugin');
-
-// function getEntries(paths) {
-//   // node 中同步获取文件列表
-//   var files = glob.sync(paths),
-//     entries = {};
-
-//   files.forEach(function(filepath) {
-//     var toArray = filepath.split('/');
-//     var filename = toArray[toArray.length - 2];
-//     entries[filename] = filepath;
-//   });
-//   return entries;
-// }
-
 
 module.exports = {
   mode: 'development',
@@ -31,7 +17,7 @@ module.exports = {
     filename: '[name].js',
     chunkFilename: '[name].[id].js',
     path: path.resolve(__dirname, 'dist/'),
-    publicPath: path.resolve(__dirname, 'dist/'),
+    publicPath:'dist/',
   },
 
   devServer: {
@@ -55,17 +41,6 @@ module.exports = {
   },
   module: {
     rules: [
-      // {
-      //   test: /.*/,
-      //   include:path.join(__dirname,'./src'),
-      //    use: {
-      //     loader: 'bundle-loader',
-      //     options: {
-      //       name: 'my-chunk',
-      //       lazy: true
-      //     }
-      //   }
-      // },
       {
         test: /\.(js|jsx)$/,
         loader: 'babel-loader',
@@ -99,11 +74,8 @@ module.exports = {
     ]
   },
   externals:[{
-    jquery: 'jQuery'
+    jQuery: 'jQuery'
   }],
-   node: {
-        fs: 'empty'
-    },
   plugins: [
     new TransferWebpackPlugin([
       {
@@ -111,7 +83,7 @@ module.exports = {
       }
     ], path.resolve(__dirname,'src')),
     new webpack.HotModuleReplacementPlugin(),
-    new CleanWebpackPlugin(['list']),
+    new CleanWebpackPlugin(['dist']),
     extractCss,
     extractScss,
     ],

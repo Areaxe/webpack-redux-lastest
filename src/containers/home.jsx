@@ -11,7 +11,6 @@ import $ from 'jQuery';
 class Home extends Component{
   componentDidMount(){
     this.props.dispatch(fetchTopicsIfNeed({}));
-    console.log($('.btn'));
   }
   
   render(){

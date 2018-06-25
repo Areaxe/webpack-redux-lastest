@@ -12,14 +12,6 @@ class Modal extends React.Component {
     this.el.className='modal';
   }
 
-  componentDidMount() {
-    modalRoot.appendChild(this.el);
-  }
-
-  componentWillUnmount() {
-    modalRoot.removeChild(this.el);
-  }
-
   render() {
     return ReactDOM.createPortal(
       <div className="modal">
