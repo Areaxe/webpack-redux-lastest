@@ -2,7 +2,7 @@ const path = require('path')
 const TransferWebpackPlugin = require('transfer-webpack-plugin');
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const extractCss = new ExtractTextPlugin('index_external.css');
+const extractCss = new ExtractTextPlugin('index.css');
 const extractScss = new ExtractTextPlugin('index.css');
 var CleanWebpackPlugin = require('clean-webpack-plugin');
 
@@ -15,14 +15,16 @@ module.exports = {
   },
   output: {
     filename: '[name].js',
-    chunkFilename: '[name].[id].js',
+    chunkFilename: '[name].[hash].js',
     path: path.resolve(__dirname, 'dist/'),
-    publicPath:'dist/',
+    publicPath:'/',
   },
 
   devServer: {
     contentBase: path.resolve(__dirname, 'dist/'),
+    publicPath:'/',
     port: 3000,
+    inline: true,
     hot: true,
   },
   
@@ -57,8 +59,9 @@ module.exports = {
       },
       {
         test:/\.css$/,
-        use: extractCss.extract(['css-loader'])
+        use: extractCss.extract(["style-loader",'css-loader'])
       },
+      
       {
         test:/\.(jpg|png|gif|svg)$/,
         use:'url-loader',
@@ -83,16 +86,14 @@ module.exports = {
       }
     ], path.resolve(__dirname,'src')),
     new webpack.HotModuleReplacementPlugin(),
-    new CleanWebpackPlugin(['dist']),
-    extractCss,
-    extractScss,
-    ],
-    optimization :{
-      splitChunks:{
-        name: 'common'
-      }
+    new CleanWebpackPlugin(['dist/*.chunk.js','index.js'],{dry:false}),
+    new ExtractTextPlugin("index.css"),
+  ],
+  optimization :{
+    splitChunks:{
+      name: 'common'
     }
-
+  }
 }
 
 //npm install --save-dev extract-text-webpack-plugin@next

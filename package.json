@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "build": "webpack --config ./webpack.base.js",
-    "dev": "webpack-dev-server --config ./webpack.base.js --watch --hot",
+    "build": "webpack",
+    "dev": "webpack-dev-server --config ./webpack.base.js --watch",
     "start": "webpack-dev-server --config ./webpack.base.js --mode production --watch"
   },
   "author": "xiaodan",
