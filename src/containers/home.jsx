@@ -6,6 +6,7 @@ import { fetchTopicsIfNeed,getTopics } from '../actions/topicAction';
 import { connect } from 'react-redux';
 import TopicList from 'components/topicList.jsx';
 import Loadding from 'components/loadding.jsx';
+import Button from 'components/button.jsx';
 import $ from 'jQuery';
 
 class Home extends Component{
@@ -29,7 +30,6 @@ class Home extends Component{
               <div>Empty.</div>)
           }
         </div>
-        <button className="btn" >aaa</button>
       </div>
     </React.Fragment>
   }

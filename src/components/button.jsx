@@ -4,11 +4,21 @@ import classnames from 'util/classnames.js';
 
 class Button extends React.Component {
   render() {
-    let {name,className,value,children} = this.props;
-    return <button onClick={this.props.onClick} className={classnames('button',{
-      [name]: name || 'promary',
-      [className]:className
-    })} >{value || children}</button>
+    let {name='primary', className, value, children,onClick,type} = this.props;
+
+    let classNames = classnames('button', {
+      [name]: name,
+      [className]: className
+    })
+
+    return (
+      <button 
+        onClick={onClick} 
+        className={classNames}
+        type={type}>
+        {value || children}
+    </button>
+    )
   }
 }
 Button.propTypes = {

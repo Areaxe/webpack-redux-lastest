@@ -4,12 +4,12 @@ import classnames from 'util/classnames.js';
 
 class FaIcon extends React.Component {
   render() {
-    let {name, className} = this.props;
+    let {name, className,onClick} = this.props;
     let classSet = classnames('fa', {
       ['fa-' + name]: name,
-      [className]: className
+      [className]: className,
     });
-    return <span className={classSet} onClick={this.props.onClick}></span>
+    return <span className={classSet} onClick={onClick}></span>
   }
 }
 FaIcon.propTypes = {}

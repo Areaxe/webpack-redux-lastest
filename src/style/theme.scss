@@ -1,6 +1,7 @@
 $main-width: 1000px;
 $border-color: #eee;
 $general-border: solid 1px $border-color;
+$text-grey: #999;
 $colors:(
   info: #17a2b8,
   indigo: #6610f2,
@@ -22,5 +23,6 @@ $colors:(
   danger: #dc3545,
   light: #f8f9fa,
   dark: #343a40,
+  light-blue:lightblue,
 )
 

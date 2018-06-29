@@ -8,20 +8,23 @@ import FaIcon from 'components/faIcon.jsx';
 class Modal extends React.Component {
   constructor(props) {
     super(props);
-    this.el = document.createElement('div');
-    this.el.className='modal';
   }
 
   render() {
-    return ReactDOM.createPortal(
-      <div className="modal">
-        <div className="modal-inner">
-          <FaIcon className="close-btn" name="close" />
-          {this.props.children}
-        </div>
-      </div>,
-      this.el,
-    );
+    let {
+      onClose,
+      children,
+      insertRoot = false
+    } = this.props;
+    
+    let content = <div className="modal">
+      <div className="modal-inner">
+        <FaIcon className="close-btn" name="close" onClick={onClose}/> {children}
+      </div>
+    </div>
+    return (insertRoot
+      ? ReactDOM.createPortal(content, appRoot)
+      : content)
   }
 }
 

@@ -1,3 +1,5 @@
+@import '../theme.scss';
+
 .modal{
   position: fixed;
   top: 0;
@@ -9,9 +11,21 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  animation: opaticyAnimate .3s;
   .modal-inner{
     background-color: #fff;
     padding: 20px 30px;
     position: relative;
+    animation: moveUp .3s;
+    .close-btn{
+      position: absolute;
+      color: $text-grey;
+      right: 10px;
+      top: 10px;
+      font-size: 20px;
+      &:hover{
+        cursor: pointer;
+      }
+    }
   }
 }

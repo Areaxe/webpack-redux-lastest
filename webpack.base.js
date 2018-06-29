@@ -2,7 +2,7 @@ const path = require('path')
 const TransferWebpackPlugin = require('transfer-webpack-plugin');
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const extractCss = new ExtractTextPlugin('index.css');
+const extractCss = new ExtractTextPlugin('index_css.css');
 const extractScss = new ExtractTextPlugin('index.css');
 var CleanWebpackPlugin = require('clean-webpack-plugin');
 
