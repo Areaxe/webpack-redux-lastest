@@ -18,7 +18,7 @@
       box-shadow: 0 0 9px $color
     }
   }
-  .close-icon{
+  .close-icon,.close-icon-hide{
     position: absolute;
     height: calc(100% - 2px);
     background-color: #fff;
@@ -34,5 +34,14 @@
       background-color: #f0f0f0;
       transition: all .3s ease-in-out;
     }
+    
+  }
+  .close-icon{
+    animation: appear .3s;
+  }
+  .close-icon-hide{
+    animation: disappear .3s;
+    animation-fill-mode: forwards;
+    // visibility: hidden;
   }
 }

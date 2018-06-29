@@ -14,9 +14,9 @@
   animation: opaticyAnimate .3s;
   .modal-inner{
     background-color: #fff;
-    padding: 20px 30px;
     position: relative;
-    animation: moveUp .3s;
+    animation: moveUp .2s;
+    border-radius: 4px;
     .close-btn{
       position: absolute;
       color: $text-grey;

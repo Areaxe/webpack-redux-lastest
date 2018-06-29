@@ -3,7 +3,6 @@
 .button{
   border-radius: 4px;
   padding: 10px 30px;
-  margin: 10px;
   border: none;
   outline: none;
   color: #fff;
@@ -16,7 +15,10 @@
       background-color: $color;
       &:hover{
         cursor: pointer;
-        box-shadow: 0 0 10px $color;
+        box-shadow: 0 0 5px $color;
+      }
+      &:focus{
+        box-shadow: 0 0 5px #999 inset; 
       }
     }
     &.light-#{$member}{

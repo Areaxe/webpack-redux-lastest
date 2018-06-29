@@ -1,0 +1,42 @@
+@import '../theme.scss';
+
+.confirm-container{
+    padding: 0px 15px 15px 15px;
+    color: #666;
+    width: 300px;
+    .confirm-header{
+      height: 42px;
+      line-height: 42px;
+      border-bottom: solid 1px #eee;
+      display: flex;
+      align-items: center;
+      .type-icon{
+        display: inline-block;
+        font-size: 20px;
+        margin-right: 10px;
+        &.icon-info{
+          color: map-get($colors, info);
+        }
+        &.icon-error{
+          color: map-get($colors, danger);
+        }
+        &.icon-success{
+          color: map-get($colors, success);
+        }
+      }
+      .confirm-title{
+        color: #333;
+        font-size: 16px;
+      }
+    }
+    .confirm-content{
+      padding: 20px 10px 10px 10px;
+    }
+    .button-group{
+      margin-top: 20px;
+      text-align: center;
+      .button{
+        margin: 0px 10px;
+      }
+    }
+}
