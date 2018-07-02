@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {Button,Modal,Input,FormLayout,Confirm,FaIcon} from 'components/index.jsx';
+import UserList from './userList.jsx';
 import style from 'style/containers/components.scss';
 class ComponentTest extends Component {
   constructor(props){
@@ -47,15 +48,7 @@ class ComponentTest extends Component {
       {
         showModal
         ? <Modal insertRoot={true} onClose={()=>this.showComponent("showModal",false)}>
-            <form className="form-test">
-              <h2 className="form-title">表单提交</h2>
-              <FormLayout left={<span>姓  名{requireIcon}</span>}>
-                <Input placeholder="请输入姓名" />
-              </FormLayout>
-              <FormLayout left="手机号"><Input /></FormLayout>
-              <FormLayout left="密  码"><Input type="password" /></FormLayout>
-              <FormLayout><Button type="button">发送</Button></FormLayout>
-            </form>
+            <UserList />
         </Modal>
         : null
       }
