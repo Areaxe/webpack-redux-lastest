@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Button,Modal,Input,FormLayout,Confirm,FaIcon} from 'components/index.jsx';
-import UserList from './userList.jsx';
+import FormComponents from './formComponents.jsx';
 import style from 'style/containers/components.scss';
 class ComponentTest extends Component {
   constructor(props){
@@ -48,7 +48,7 @@ class ComponentTest extends Component {
       {
         showModal
         ? <Modal insertRoot={true} onClose={()=>this.showComponent("showModal",false)}>
-            <UserList />
+            <FormComponents />
         </Modal>
         : null
       }
